@@ -11,7 +11,7 @@ import SwiftUI
 struct HMSApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RegisterScreen()
         }
     }
 }
