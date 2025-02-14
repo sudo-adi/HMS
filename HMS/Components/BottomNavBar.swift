@@ -42,7 +42,7 @@ struct BottomNavBar: View {
         case "Utilities":
             Text("Utilities Screen") // Replace with actual screen
         default:
-            HomeScreenView()
+            ScheduleScreen()
         }
     }
 }

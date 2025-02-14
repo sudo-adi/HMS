@@ -1,14 +1,7 @@
-//
-//  AppointmentCard.swift
-//  HMS
-//
-//  Created by Yankit Kumar on 13/02/25.
-//
-
 import SwiftUI
 
 // MARK: - Model for Appointment
-struct Appointment: Identifiable {
+struct PatientHistoryAppointment: Identifiable {
     let id = UUID()
     let doctorName: String
     let date: Date
@@ -18,7 +11,7 @@ struct Appointment: Identifiable {
 }
 
 // MARK: - Reusable AppointmentCard Component
-struct AppointmentCard: View {
+struct PatientHistoryAppointmentCard: View {
     let appointment: Appointment
     
     var statusColor: Color {
@@ -85,16 +78,17 @@ struct AppointmentCard: View {
 }
 
 // MARK: - Preview
-//struct AppointmentCard_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AppointmentCard(appointment: Appointment(
-//            doctorName: "Dr. Ritu Sharma",
-//            date: "26 FEB 2025",
-//            time: "09:00",
-//            status: "Attended",
-//            isFollowUp: false
-//        ))
-//        .previewLayout(.sizeThatFits)
-//        .padding()
-//    }
-//}
+
+struct Patient_History_AppointmentCard_Previews: PreviewProvider {
+    static var previews: some View {
+        PatientHistoryAppointmentCard(appointment: Appointment(
+            doctorName: "Dr. Ritu Sharma",
+            date: .now,
+            time: .now,
+            status: "Attended",
+            isFollowUp: false
+        ))
+        .previewLayout(.sizeThatFits)
+        .padding()
+    }
+}

@@ -31,15 +31,15 @@ struct ScheduleScreen: View {
                         
                         AppointmentCard(appointment: Appointment(
                             doctorName: "Dr. Ritu Sharma",
-                            date: "26 FEB 2025",
-                            time: "09:00",
+                            date: .now,
+                            time: .now,
                             status: "Attended",
                             isFollowUp: false
                         ))
                         AppointmentCard(appointment: Appointment(
                             doctorName: "Dr. Ritu Sharma",
-                            date: "26 FEB 2025",
-                            time: "09:00",
+                            date: .now,
+                            time: .now,
                             status: "Not-Attended",
                             isFollowUp: true
                         ))

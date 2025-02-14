@@ -122,18 +122,17 @@ struct ScheduleRow: View {
     }
 }
 
-// MARK: - Appointment Card
-//struct AppointmentCard: View {
-//    let appointment: Appointment
-//    
-//    var body: some View {
-//        Text("\(appointment.patientName)'s Appointment")
-//            .padding()
-//            .frame(maxWidth: .infinity, alignment: .leading)
-//            .background(Color.blue.opacity(0.2))
-//            .cornerRadius(10)
-//    }
-//}
+struct DoctorsScheduleAppointmentCard: View {
+    let appointment: Appointment
+    
+    var body: some View {
+        Text("\(appointment.doctorName)'s Appointment")
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color.blue.opacity(0.2))
+            .cornerRadius(10)
+    }
+}
 
 // MARK: - Tab Bar Item
 struct TabBarItem: View {
