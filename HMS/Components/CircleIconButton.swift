@@ -1,17 +1,11 @@
-//
-//  CircleIconButton.swift
-//  HMS
-//
-//  Created by Dhruv Jain on 13/02/25.
-//
-
 import SwiftUI
 
 struct CircleIconButton: View {
     let systemName: String
+    let action: () -> Void // ✅ Action closure for reusability
 
     var body: some View {
-        Button(action: {}) {
+        Button(action: action) { // ✅ Calls the provided action
             Image(systemName: systemName)
                 .font(.system(size: 18))
                 .foregroundColor(.gray)
@@ -23,6 +17,7 @@ struct CircleIconButton: View {
     }
 }
 
+// ✅ Preview
 #Preview {
-    CircleIconButton(systemName: "bell")
+    CircleIconButton(systemName: "bell", action: {})
 }

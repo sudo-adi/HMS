@@ -17,7 +17,7 @@ struct TabSwitcher: View {
 
 // ✅ Dynamic Preview
 #Preview {
-    @State var selectedTab = "Schedule"
+    @Previewable @State var selectedTab = "Schedule"
     let dynamicTabs = ["Schedule", "History", "Upcoming"] // Example with 3 segments
 
     return TabSwitcher(selectedTab: $selectedTab, tabs: dynamicTabs)

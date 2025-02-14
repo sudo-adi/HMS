@@ -2,7 +2,9 @@ import SwiftUI
 
 struct HomeScreenView: View {
     @State private var selectedTab: String = "Home"
-    
+    @State private var showNotifications: Bool = false
+    @State private var showSpecialists: Bool = false
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -23,12 +25,15 @@ struct HomeScreenView: View {
 
                     // Icons (Search, Bell, Profile)
                     HStack(spacing: 12) {
-                        CircleIconButton(systemName: "magnifyingglass")
+                        CircleIconButton(systemName: "magnifyingglass") {
+                            showSpecialists = true // ✅ Open modal
+                        }
 
-                        // 🔹 Bell Icon (No NavigationLink, Just an Icon)
-                        CircleIconButton(systemName: "bell")
+                        CircleIconButton(systemName: "bell") {
+                            showNotifications = true // ✅ Open modal
+                        }
 
-                        CircleIconButton(systemName: "person.crop.circle")
+                        CircleIconButton(systemName: "person.crop.circle", action: {})
                     }
                 }
                 .padding(.horizontal)
@@ -36,16 +41,32 @@ struct HomeScreenView: View {
 
                 Spacer()
 
-                // 🔹 Bottom Navigation Bar (Fixed at Bottom)
-                BottomNavBar(selectedTab: $selectedTab)
+                // 🔹 Bottom Navigation Bar
+//                BottomNavBar(selectedTab: $selectedTab)
             }
             .background(Color(UIColor.systemGray6))
             .ignoresSafeArea(.all, edges: [.bottom])
+            .sheet(isPresented: $showNotifications) {
+                NotificationsView(showNotifications: $showNotifications)
+            }
+            .sheet(isPresented: $showSpecialists) {
+                SpecialistsListView()
+            }
+            .onAppear {
+                checkNavigationToHome()
+            }
+        }
+    }
+
+    private func checkNavigationToHome() {
+        if UserDefaults.standard.bool(forKey: "navigateToHome") {
+            UserDefaults.standard.set(false, forKey: "navigateToHome")  // Reset flag
+            selectedTab = "Home"  // ✅ Ensure Home is selected
         }
     }
 }
 
-// ✅ **Preview**
+// ✅ Preview
 #Preview {
     HomeScreenView()
 }

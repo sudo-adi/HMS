@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct AppointmentSelectionView: View {
-    @Environment(\.presentationMode) var presentationMode
     @State private var selectedSlot: String? = nil
+    @State private var showBookedScreen = false  // ✅ State for modal presentation
     
     let timeSlots: [(time: String, type: TimeSlotType)] = [
         ("09:00", .booked), ("09:45", .free), ("10:30", .free),
@@ -11,62 +11,53 @@ struct AppointmentSelectionView: View {
     ]
     
     var body: some View {
-        VStack(spacing: 15) {
-            // Title & Back Button
-            HStack {
-                Button(action: { presentationMode.wrappedValue.dismiss() }) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.black)
-                        .font(.title2)
-                }
-                Spacer()
-                Text("Choose date and time")
-                    .font(.system(size: 18, weight: .semibold))
-                Spacer()
-            }
-            .padding(.horizontal)
-            .padding(.top, 10)
-            
-            // Calendar Component
-            CalendarView()
-                .frame(height: 280) // Adjusted height
-                .padding(.horizontal, 20) // Less padding
-            
-            // Time Slots Section
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Available Slots")
-                    .font(.system(size: 16, weight: .semibold))
-                    .padding(.leading, 20)
-                    .padding(.bottom, 20)
+        NavigationStack {
+            VStack(spacing: 15) {
+                // Calendar Component
+                CalendarView()
+                    .frame(height: 280)
+                    .padding(.horizontal, 20)
                 
-                ScrollView(.vertical, showsIndicators: false) {
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 3), spacing: 15) {
-                        ForEach(timeSlots, id: \.time) { slot in
-                            TimeSlotButton(time: slot.time, type: slot.type, isSelected: selectedSlot == slot.time) {
-                                selectedSlot = slot.time
+                // Time Slots Section
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Available Slots")
+                        .font(.system(size: 16, weight: .semibold))
+                        .padding(.leading, 20)
+                        .padding(.bottom, 20)
+                    
+                    ScrollView(.vertical, showsIndicators: false) {
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 3), spacing: 15) {
+                            ForEach(timeSlots, id: \.time) { slot in
+                                TimeSlotButton(time: slot.time, type: slot.type, isSelected: selectedSlot == slot.time) {
+                                    selectedSlot = slot.time
+                                }
                             }
                         }
+                        .padding(.horizontal, 20)
+                        .frame(maxHeight: 230)
                     }
-                    .padding(.horizontal, 20) // Less padding
-                    .frame(maxHeight: 230) // Adjusted height
                 }
+                
+                // Make an Appointment Button
+                PrimaryButton(title: "Make an appointment") {
+                    showBookedScreen = true
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 60)
             }
-            
-            // Make an Appointment Button
-            PrimaryButton(title: "Make an appointment") {
-                // Handle appointment confirmation
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(UIColor.systemGray6))
+            .sheet(isPresented: $showBookedScreen) {
+                AppointmentBookedView()
+                    .interactiveDismissDisabled(true)  // ✅ Prevents accidental dismissal
             }
-            .padding(.horizontal, 20) // Reduced side space
-            .padding(.bottom, 60) // Less bottom space
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity) // Take full screen width
-        .background(Color(UIColor.systemGray6))
-        .ignoresSafeArea(edges: .bottom) // Avoid extra bottom padding
     }
 }
 
 // MARK: - Preview
 #Preview {
-    AppointmentSelectionView()
-        .previewDevice("iPhone 16 Pro")
+    NavigationStack {
+        AppointmentSelectionView()
+    }
 }

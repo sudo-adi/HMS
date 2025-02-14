@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct NotificationsView: View {
-    @Binding var showNotifications: Bool // ✅ Binding to dismiss the modal
+    @Binding var showNotifications: Bool // ✅ Binding to dismiss modal
 
     var body: some View {
         NavigationStack {
@@ -24,12 +24,11 @@ struct NotificationsView: View {
 
                     Spacer()
 
-                    // Spacer to balance alignment
-                    Color.clear.frame(width: 40, height: 40)
+                    Color.clear.frame(width: 40, height: 40) // Spacer for balance
                 }
                 .padding(.top, 10)
 
-                // 🔹 Reusable Notification Card
+                // 🔹 Example Notification Card
                 NotificationCard(
                     doctorName: "Dr. Ritu Sharma",
                     appointmentID: "5673",
@@ -48,6 +47,7 @@ struct NotificationsView: View {
     }
 }
 
+// ✅ Preview
 #Preview {
     NotificationsView(showNotifications: .constant(true))
 }
