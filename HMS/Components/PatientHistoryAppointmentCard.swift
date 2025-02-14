@@ -11,8 +11,8 @@ import SwiftUI
 struct Appointment: Identifiable {
     let id = UUID()
     let doctorName: String
-    let date: String
-    let time: String
+    let date: Date
+    let time: Date
     let status: String
     let isFollowUp: Bool
 }
@@ -60,9 +60,9 @@ struct AppointmentCard: View {
                 }
                 
                 HStack {
-                    Text(appointment.date)
+                    Text(String(appointment.date.description))
                     Image(systemName: "clock")
-                    Text(appointment.time)
+                    Text(String(appointment.time.description))
                 }
                 .font(.caption)
                 .foregroundColor(.black)
@@ -85,16 +85,16 @@ struct AppointmentCard: View {
 }
 
 // MARK: - Preview
-struct AppointmentCard_Previews: PreviewProvider {
-    static var previews: some View {
-        AppointmentCard(appointment: Appointment(
-            doctorName: "Dr. Ritu Sharma",
-            date: "26 FEB 2025",
-            time: "09:00",
-            status: "Attended",
-            isFollowUp: false
-        ))
-        .previewLayout(.sizeThatFits)
-        .padding()
-    }
-}
+//struct AppointmentCard_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AppointmentCard(appointment: Appointment(
+//            doctorName: "Dr. Ritu Sharma",
+//            date: "26 FEB 2025",
+//            time: "09:00",
+//            status: "Attended",
+//            isFollowUp: false
+//        ))
+//        .previewLayout(.sizeThatFits)
+//        .padding()
+//    }
+//}
