@@ -36,13 +36,14 @@ struct BottomNavBar: View {
     private func getDestination(for tab: String) -> some View {
         switch tab {
         case "Home":
-            HomeScreenView()
+            ScheduleScreen()
+            //HomeScreenView()
         case "Schedule":
             ScheduleScreen()
         case "Utilities":
             Text("Utilities Screen") // Replace with actual screen
         default:
-            HomeScreenView()
+            ScheduleScreen()
         }
     }
 }
