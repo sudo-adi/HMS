@@ -123,17 +123,17 @@ struct ScheduleRow: View {
 }
 
 // MARK: - Appointment Card
-struct AppointmentCard: View {
-    let appointment: Appointment
-    
-    var body: some View {
-        Text("\(appointment.patientName)'s Appointment")
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.blue.opacity(0.2))
-            .cornerRadius(10)
-    }
-}
+//struct AppointmentCard: View {
+//    let appointment: Appointment
+//    
+//    var body: some View {
+//        Text("\(appointment.patientName)'s Appointment")
+//            .padding()
+//            .frame(maxWidth: .infinity, alignment: .leading)
+//            .background(Color.blue.opacity(0.2))
+//            .cornerRadius(10)
+//    }
+//}
 
 // MARK: - Tab Bar Item
 struct TabBarItem: View {
@@ -151,11 +151,11 @@ struct TabBarItem: View {
 }
 
 // MARK: - Appointment Model
-struct Appointment: Identifiable {
-    let id = UUID()
-    let patientName: String
-    let time: Date
-}
+//struct Appointment: Identifiable {
+//    let id = UUID()
+//    let patientName: String
+//    let time: Date
+//}
 
 // MARK: - Generate Appointments
 func generateAppointments(for date: Date) -> [Appointment] {
@@ -169,7 +169,8 @@ func generateAppointments(for date: Date) -> [Appointment] {
         let randomMinute = [0, 15, 30, 45].randomElement()!
         let appointmentTime = calendar.date(bySettingHour: randomHour, minute: randomMinute, second: 0, of: date)!
 
-        let appointment = Appointment(patientName: randomNames.randomElement()!, time: appointmentTime)
+//        let appointment = Appointment(patientName: randomNames.randomElement()!, time: appointmentTime)
+        let appointment = Appointment(doctorName: randomNames.randomElement() ?? "Happy", date: Date(), time: .now, status: "available", isFollowUp: false)
         appointments.append(appointment)
     }
 
